@@ -3,6 +3,7 @@ package com.marcobehler;
 import org.junit.Test;
 
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -15,12 +16,12 @@ import java.util.stream.Collectors;
 public class PotusTest {
 
     private List<Wife> wifesOfDonaldTrump = Arrays.asList(
-            new Wife("Melania", Arrays.asList(new Child("Barron"))),
-            new Wife("Marla", Arrays.asList(new Child("Tiffany"))),
+            new Wife("Melania", Arrays.asList(new Child("Barron", 12))),
+            new Wife("Marla", Arrays.asList(new Child("Tiffany", 24))),
             new Wife("Ivana", Arrays.asList(
-                    new Child("Donald Trump Jr."),
-                    new Child("Ivanka"),
-                    new Child("Eric")))
+                    new Child("Donald Trump Jr.", 40),
+                    new Child("Ivanka", 36),
+                    new Child("Eric", 34)))
             );
 
     private List<Potus> potuses = Arrays.asList(
@@ -46,5 +47,16 @@ public class PotusTest {
                 .limit(3)
                 .collect(Collectors.toList())
                 .forEach(System.out::println);
+    }
+
+    @Test
+    public void flatmap() {
+        Potus trump = potuses.get(0);
+
+        trump.getWifes().stream()
+                .flatMap(wife -> wife.getChildren().stream())
+                .sorted(Comparator.comparing(Child::getName).reversed())
+                .forEach(System.out::println);
+
     }
 }
