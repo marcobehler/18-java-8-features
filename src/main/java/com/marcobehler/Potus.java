@@ -1,5 +1,8 @@
 package com.marcobehler;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Thanks for watching this episode! Send any feedback to info@marcobehler.com!
  */
@@ -13,6 +16,8 @@ public class Potus {
 
     private String party;
 
+    private List<Wife> wifes = new ArrayList<>();
+
     public Potus() {
     }
 
@@ -21,6 +26,11 @@ public class Potus {
         this.lastName = lastName;
         this.electionYear = electionYear;
         this.party = party;
+    }
+
+    public Potus(String firstName, String lastName, Integer electionYear, String party, List<Wife> wifes) {
+        this(firstName, lastName, electionYear, party);
+        this.wifes = wifes;
     }
 
     public String getFirstName() {
@@ -53,5 +63,13 @@ public class Potus {
 
     public void setParty(String party) {
         this.party = party;
+    }
+
+    public List<Wife> getWifes() {
+        return wifes;
+    }
+
+    public void setWifes(List<Wife> wifes) {
+        this.wifes = wifes;
     }
 }
