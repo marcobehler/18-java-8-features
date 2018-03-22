@@ -3,14 +3,12 @@ package com.marcobehler;
 import org.junit.Test;
 
 import java.util.Arrays;
-import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
 /**
  * Thanks for watching this episode! Send any feedback to info@marcobehler.com!
  */
-
 
 
 public class PotusTest {
@@ -22,7 +20,7 @@ public class PotusTest {
                     new Child("Donald Trump Jr.", 40),
                     new Child("Ivanka", 36),
                     new Child("Eric", 34)))
-            );
+    );
 
     private List<Potus> potuses = Arrays.asList(
             new Potus("Donald", "Trump", 2016, "Republican", wifesOfDonaldTrump),
@@ -47,16 +45,5 @@ public class PotusTest {
                 .limit(3)
                 .collect(Collectors.toList())
                 .forEach(System.out::println);
-    }
-
-    @Test
-    public void flatmap() {
-        Potus trump = potuses.get(0);
-
-        trump.getWifes().stream()
-                .flatMap(wife -> wife.getChildren().stream())
-                .sorted(Comparator.comparing(Child::getName).reversed())
-                .forEach(System.out::println);
-
     }
 }
