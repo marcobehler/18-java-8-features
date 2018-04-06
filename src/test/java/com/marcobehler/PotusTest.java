@@ -3,7 +3,10 @@ package com.marcobehler;
 import org.junit.Test;
 
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 /**
@@ -23,7 +26,8 @@ public class PotusTest {
     );
 
     private List<Potus> potuses = Arrays.asList(
-            new Potus("Donald", "Trump", 2016, "Republican", wifesOfDonaldTrump),
+            new Potus("Donald", "Trump",
+                    2016, "Republican", wifesOfDonaldTrump),
             new Potus("Barack", "Obama", 2012, "Democratic"),
             new Potus("Barack", "Obama", 2008, "Democratic"),
             new Potus("George W.", "Bush", 2004, "Republican"),
@@ -45,5 +49,18 @@ public class PotusTest {
                 .limit(3)
                 .collect(Collectors.toList())
                 .forEach(System.out::println);
+    }
+
+    @Test
+    public void flatmap_sort_collect() {
+        Potus trump = potuses.get(0);
+
+        Map<Integer,Child> kids = trump.getWifes()
+                .stream()
+                .flatMap(wife -> wife.getChildren().stream())
+                .sorted(Comparator.comparing(Child::getAge).reversed())
+                .collect(Collectors.toMap(Child::getAge, Function.identity()));
+
+        System.out.println(kids);
     }
 }
