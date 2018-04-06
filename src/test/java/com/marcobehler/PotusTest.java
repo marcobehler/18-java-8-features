@@ -2,11 +2,9 @@ package com.marcobehler;
 
 import org.junit.Test;
 
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.function.Function;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 /**
@@ -55,12 +53,38 @@ public class PotusTest {
     public void flatmap_sort_collect() {
         Potus trump = potuses.get(0);
 
-        Map<Integer,Child> kids = trump.getWifes()
+        Map<Integer, Child> kids = trump.getWifes()
                 .stream()
                 .flatMap(wife -> wife.getChildren().stream())
                 .sorted(Comparator.comparing(Child::getAge).reversed())
                 .collect(Collectors.toMap(Child::getAge, Function.identity()));
 
         System.out.println(kids);
+    }
+
+
+    @Test
+    public void find_and_match() {
+        Potus trump = potuses.get(0);
+
+        Predicate<Wife> hasMoreThan2Children = wife -> wife.getChildren().size() > 2;
+
+        Optional<Wife> firstWife = trump
+                .getWifes()
+                .stream()
+                .filter(hasMoreThan2Children)
+                .findFirst();
+        System.out.println("firstWife = " + firstWife);
+
+        boolean doesEveryWifeHaveMoreThan2Kids = wifesOfDonaldTrump.stream().allMatch(hasMoreThan2Children);
+        System.out.println("doesEveryWifeHaveMoreThan2Kids = " + doesEveryWifeHaveMoreThan2Kids);
+
+        boolean doesAnyWifeHaveMoreThan2Kids = wifesOfDonaldTrump.stream().anyMatch(hasMoreThan2Children);
+        System.out.println("doesAnyWifeHaveMoreThan2Kids = " + doesAnyWifeHaveMoreThan2Kids);
+
+        boolean notASingleWifeHasMoreThan2Kids = wifesOfDonaldTrump.stream().noneMatch(hasMoreThan2Children);
+        System.out.println("notASingleWifeHasMoreThan2Kids = " + notASingleWifeHasMoreThan2Kids);
+
+
     }
 }
