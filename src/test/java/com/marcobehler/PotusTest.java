@@ -53,7 +53,7 @@ public class PotusTest {
     public void flatmap_sort_collect() {
         Potus trump = potuses.get(0);
 
-        Map<Integer, Child> kids = trump.getWifes()
+        Map<Integer, Child> kids = trump.getWives()
                 .stream()
                 .flatMap(wife -> wife.getChildren().stream())
                 .sorted(Comparator.comparing(Child::getAge).reversed())
@@ -70,7 +70,7 @@ public class PotusTest {
         Predicate<Wife> hasMoreThan2Children = wife -> wife.getChildren().size() > 2;
 
         Optional<Wife> firstWife = trump
-                .getWifes()
+                .getWives()
                 .stream()
                 .filter(hasMoreThan2Children)
                 .findFirst();
@@ -84,7 +84,7 @@ public class PotusTest {
 
         boolean notASingleWifeHasMoreThan2Kids = wifesOfDonaldTrump.stream().noneMatch(hasMoreThan2Children);
         System.out.println("notASingleWifeHasMoreThan2Kids = " + notASingleWifeHasMoreThan2Kids);
-
-
     }
+
+
 }

@@ -16,7 +16,7 @@ public class Potus {
 
     private String party;
 
-    private List<Wife> wifes = new ArrayList<>();
+    private List<Wife> wives = new ArrayList<>();
 
     public Potus() {
     }
@@ -28,9 +28,9 @@ public class Potus {
         this.party = party;
     }
 
-    public Potus(String firstName, String lastName, Integer electionYear, String party, List<Wife> wifes) {
+    public Potus(String firstName, String lastName, Integer electionYear, String party, List<Wife> wives) {
         this(firstName, lastName, electionYear, party);
-        this.wifes = wifes;
+        this.wives = wives;
     }
 
     public String getFirstName() {
@@ -65,11 +65,11 @@ public class Potus {
         this.party = party;
     }
 
-    public List<Wife> getWifes() {
-        return wifes;
+    public List<Wife> getWives() {
+        return wives;
     }
 
-    public void setWifes(List<Wife> wifes) {
-        this.wifes = wifes;
+    public void setWives(List<Wife> wives) {
+        this.wives = wives;
     }
 }
