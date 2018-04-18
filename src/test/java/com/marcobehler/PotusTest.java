@@ -87,4 +87,16 @@ public class PotusTest {
     }
 
 
+    @Test
+    public void reduce() {
+        Potus trump = potuses.get(0);
+
+        int totalNumberOfChildren = trump
+                .getWives()
+                .stream()
+                .reduce(0, (sum, wife) -> sum + wife.getChildren().size(),
+                        (sum1, sum2) -> sum1 + sum2);
+
+        System.out.println("totalNumberOfChildren = " + totalNumberOfChildren);
+    }
 }
