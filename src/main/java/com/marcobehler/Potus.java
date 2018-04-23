@@ -2,6 +2,8 @@ package com.marcobehler;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
+import java.util.function.Consumer;
 
 /**
  * Thanks for watching this episode! Send any feedback to info@marcobehler.com!
@@ -71,5 +73,15 @@ public class Potus {
 
     public void setWives(List<Wife> wives) {
         this.wives = wives;
+    }
+
+    public void giveSpeech(Runnable runnable) {
+        System.out.println("I am giving a crazy speech!");
+        runnable.run();
+    }
+
+    public void giveSpeech2(Consumer<Integer> consumer) {
+        System.out.println("I am giving a crazy speech!");
+        consumer.accept(ThreadLocalRandom.current().nextInt());
     }
 }
