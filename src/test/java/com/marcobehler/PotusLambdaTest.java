@@ -83,5 +83,28 @@ public class PotusLambdaTest {
         });
     }
 
+    @Test
+    public void lambda_2() {
+        Predicate<Potus> hasAtLeastOneWife = potus -> potus.getWives().size() >= 1;
+        Predicate<Potus> hasAtLeastTwoWifes = potus -> potus.getWives().size() >= 2;
 
+        Function<Potus, String> mapPotusToWifesName = potus -> potus.getWives().get(0).getName();
+
+        processPresidents(potuses,
+                hasAtLeastTwoWifes,
+                mapPotusToWifesName,
+                System.out::println);
+    }
+
+    private void processPresidents(List<Potus> potuses,
+                                   Predicate<Potus> predicate,
+                                   Function<Potus, String> mapper,
+                                   Consumer<String> consumer) {
+        for (Potus potus : potuses) {
+            if (predicate.test(potus)) {
+                String data = mapper.apply(potus);
+                consumer.accept(data);
+            }
+        }
+    }
 }
