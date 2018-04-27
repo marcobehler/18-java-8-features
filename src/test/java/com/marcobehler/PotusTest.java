@@ -99,4 +99,15 @@ public class PotusTest {
 
         System.out.println("totalNumberOfChildren = " + totalNumberOfChildren);
     }
+
+    @Test
+    public void parallel_streams() {
+        Potus trump = potuses.get(0);
+
+        trump.getWives()
+                .stream()
+                .filter(wife -> wife.getName().startsWith("M"))
+                .findAny()
+                .ifPresent(wife -> System.out.println(wife.getName()));
+    }
 }
