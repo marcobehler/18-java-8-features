@@ -2,6 +2,7 @@ package com.marcobehler;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.function.Consumer;
 
@@ -84,4 +85,15 @@ public class Potus {
         System.out.println("I am giving a crazy speech!");
         consumer.accept(ThreadLocalRandom.current().nextInt());
     }
+
+
+    public String getPlanFor(String country) {
+        if (country.equals("Germany")) {
+            return "Oktoberfest!";
+        }
+        else {
+            return null;
+        }
+    }
+
 }
