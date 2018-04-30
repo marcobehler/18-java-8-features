@@ -1,7 +1,9 @@
 package com.marcobehler;
 
+import javax.swing.text.html.Option;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.function.Consumer;
 
@@ -86,11 +88,11 @@ public class Potus {
     }
 
 
-    public String getPlanFor(String country) {
+    public Optional<String> getPlanFor(String country) {
         if (country.equals("Germany")) {
-            return "Oktoberfest!";
+            return Optional.of("Oktoberfest!");
         } else {
-            return null;
+            return Optional.empty();
         }
     }
 
