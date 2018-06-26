@@ -2,6 +2,7 @@ package com.marcobehler;
 
 import org.junit.Test;
 
+import java.util.Collections;
 import java.util.Optional;
 
 /**
@@ -37,6 +38,27 @@ public class OptionalsTest {
         System.out.println("name = " + name);
     }
 
+    @Test
+    public void optionals_part_3() {
+        Potus anyPotus = new Potus();
+
+        Optional<Wife> wife = findWife(anyPotus, "M");
+
+        Wife plainWife = wife.orElse(createNewWife());
+        System.out.println("plainWife = " + plainWife);
+
+        Wife plainWife2 = wife.orElseGet(this::createNewWife);
+        System.out.println("plainWife2 = " + plainWife2);
+
+        Wife plainWife3 = wife.orElseThrow(() -> new IllegalStateException("no wife was found!"));
+        System.out.println("plainWife3 = " + plainWife3);
+
+    }
+
+    private Wife createNewWife() {
+        System.out.println("createNewWife method was called..");
+        return new Wife("Melanie", Collections.emptyList());
+    }
 
     @Test
     public void exercise() {
